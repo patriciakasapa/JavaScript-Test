@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .button {
+          background-color: #4CAF50;
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+          margin: 10px;
+          border: none;
+          color: blue;
+          border-radius: 50px;
+          cursor: pointer;
+        }
+      </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="buttons"></div>
+    <button id="evenButton" >Even</button>
+    <button id="oddButton">Odd</button>
+    <button id="smallButton">Small</button>
+    <button id="bigButton">Big</button>
+    <button id="allButton">All</button>
+    <button id="clearButton">Clear</button>
+
+    <script>
+
+const bets = [[2,3,4,5,6], [7,6,5,4,3], [0,9,8,6,3], [1,3,5,7,9], [2,3,4,0,9],  [5,2,3,4,1]]
+
+//Winning numbers
+const drawNumber = [1,2,3,4,5]
+
+//task 1
+let isFound = false;
+let position = -1;
+let count = 0;
+
+for (let i = 0; i < bets.length; i++) {
+  let currentBet = bets[i];
+  console.log("Current Bet", currentBet);
+
+  let matchCount = 0;
+  for (let j = 0; j < drawNumber.length; j++) {
+    console.log("Draw number", drawNumber);
+    console.log("Count Before", matchCount);
+    if (currentBet.includes(drawNumber[j])) {
+      matchCount++;
+      console.log("Count", matchCount);
+    }
+    
+  }
+  if (matchCount === drawNumber.length) {
+    isFound = true;
+    position = i;
+    count++;
+    break;
+  }
+}
+
+// a. write a program to check if drawNumber is in
+// bets Array
+if (isFound) {
+    console.log("Draw number is in the bets array.");
+  } else {
+    console.log("Draw number is not in the bets array.");
+  }
+
+// b. find the position of the drawNumber in bets Array
+if (position !== -1) {
+  console.log(`Draw number is found at position ${position}.`);
+} else {
+  console.log("Draw number is not in the bets array.");
+}
+
+// c. find the count of drawNumber in bets Array
+if (count > 0) {
+    console.log(`Draw number appears ${count} time(s) in the bets array.`);
+  } else {
+    console.log("Draw number does not appear in the bets array.");
+  }
+  
+//task 2
+// a. write a program to display 10 buttons 0 - 9
+let selectedNumbers = [];
+
+for (let i = 0; i < 10; i++) {
+    let button = document.createElement("button");
+    button.innerHTML = i;
+    button.classList.add("button");
+    button.onclick = function() {
+        if (selectedNumbers.indexOf(i) === -1) {
+            selectedNumbers.push(i);
+            console.log("Selected buttons on push", selectedNumbers);
+          } else {
+            selectedNumbers.splice(selectedNumbers.indexOf(i), 1);
+            console.log("Selected buttons on splice", selectedNumbers);
+          }
+        };
+        document.getElementById("buttons").appendChild(button);
+}
+
+// b. Add another button name even
+// c. Add another button name odd
+//------------------ name small
+//------------------ name big
+//------------------ name clear
+//------------------ name all 
+
+//When you click on either even,odd,small,big,all
+//push to an Array either even,odd,small,big,all
+
+      document.getElementById("evenButton").onclick = function() {
+        selectedNumbers = [];
+        for (let i = 0; i < 10; i++) {
+          if (i % 2 === 0) {
+            selectedNumbers.push(i);
+            console.log("Even buttons", selectedNumbers);
+          }
+        }
+      };
+
+      document.getElementById("oddButton").onclick = function() {
+        selectedNumbers = [];
+        for (let i = 0; i < 10; i++) {
+          if (i % 2 !== 0) {
+            selectedNumbers.push(i);
+            console.log("Odd buttons", selectedNumbers);
+          }
+        }
+      };
+
+      document.getElementById("smallButton").onclick = function() {
+        selectedNumbers = [];
+        for (let i = 0; i < 5; i++) {
+          selectedNumbers.push(i);
+          console.log("Small buttons", selectedNumbers);
+        }
+      };
+
+      document.getElementById("bigButton").onclick = function() {
+        selectedNumbers = [];
+        for (let i = 5; i < 10; i++) {
+          selectedNumbers.push(i);
+          console.log("Big buttons", selectedNumbers);
+        }
+      };
+
+      document.getElementById("allButton").onclick = function() {
+        selectedNumbers = [];
+        for (let i = 0; i < 10; i++) {
+          selectedNumbers.push(i);
+          console.log("All buttons", selectedNumbers);
+        }
+      };
+
+
+    </script>
+</body>
+</html>
