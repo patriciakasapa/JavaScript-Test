@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <style>
-        .button {
+        .btn {
           background-color: #4CAF50;
           width: 50px;
           height: 50px;
@@ -11,8 +11,41 @@
           border: none;
           color: blue;
           border-radius: 50px;
+          border: 2px solid #4CAF50;
+          transition-duration: 0.4s;
           cursor: pointer;
         }
+
+        .numberButton {
+          background-color: white;
+        }
+
+        .numberButton:hover {
+          background-color: #4CAF50;
+          color: white;
+        }
+
+        .btn-group .special {
+          display: block;
+          background-color: #ad7b1c;
+          border: 1px solid rgb(177, 62, 9);
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          font-size: 16px;
+          cursor: pointer;
+          width: 150px;
+          display: block;
+        }
+
+        .btn-group .special:hover {
+          background-color: #5e3903;
+        }
+
+        .highlighted {
+        background-color: yellow;
+      }
       </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,15 +54,31 @@
 </head>
 <body>
 
-    <div id="buttons"></div>
-    <button id="evenButton" >Even</button>
-    <button id="oddButton">Odd</button>
-    <button id="smallButton">Small</button>
-    <button id="bigButton">Big</button>
-    <button id="allButton">All</button>
-    <button id="clearButton">Clear</button>
+        <!-- 10 buttons numbered 0 to 9 -->
+        <button class="btn numberButton" id="button0">0</button>
+        <button class="btn numberButton" id="button1">1</button>
+        <button class="btn numberButton" id="button2">2</button>
+        <button class="btn numberButton" id="button3">3</button>
+        <button class="btn numberButton" id="button4">4</button>
+        <button class="btn numberButton" id="button5">5</button>
+        <button class="btn numberButton" id="button6">6</button>
+        <button class="btn numberButton" id="button7">7</button>
+        <button class="btn numberButton" id="button8">8</button>
+        <button class="btn numberButton" id="button9">9</button>
+        
+        <!-- Other buttons -->
+        <div class="btn-group">
+          <button class="special" id="even">Even</button>
+          <button class="special" id="odd">Odd</button>
+          <button class="special" id="small">Small</button>
+          <button class="special" id="big">Big</button>
+          <button class="special" id="all">All</button>
+          <button class="special" id="clear">Clear</button>
+        </div>
+        
+    
 
-    <script>
+<script>
 
 const bets = [[2,3,4,5,6], [7,6,5,4,3], [0,9,8,6,3], [1,3,5,7,9], [2,3,4,0,9],  [5,2,3,4,1]]
 
@@ -43,15 +92,10 @@ let count = 0;
 
 for (let i = 0; i < bets.length; i++) {
   let currentBet = bets[i];
-  console.log("Current Bet", currentBet);
-
   let matchCount = 0;
   for (let j = 0; j < drawNumber.length; j++) {
-    console.log("Draw number", drawNumber);
-    console.log("Count Before", matchCount);
     if (currentBet.includes(drawNumber[j])) {
       matchCount++;
-      console.log("Count", matchCount);
     }
     
   }
@@ -87,23 +131,8 @@ if (count > 0) {
   
 //task 2
 // a. write a program to display 10 buttons 0 - 9
-let selectedNumbers = [];
+// let selectedNumbers = [];
 
-for (let i = 0; i < 10; i++) {
-    let button = document.createElement("button");
-    button.innerHTML = i;
-    button.classList.add("button");
-    button.onclick = function() {
-        if (selectedNumbers.indexOf(i) === -1) {
-            selectedNumbers.push(i);
-            console.log("Selected buttons on push", selectedNumbers);
-          } else {
-            selectedNumbers.splice(selectedNumbers.indexOf(i), 1);
-            console.log("Selected buttons on splice", selectedNumbers);
-          }
-        };
-        document.getElementById("buttons").appendChild(button);
-}
 
 // b. Add another button name even
 // c. Add another button name odd
@@ -115,51 +144,149 @@ for (let i = 0; i < 10; i++) {
 //When you click on either even,odd,small,big,all
 //push to an Array either even,odd,small,big,all
 
-      document.getElementById("evenButton").onclick = function() {
-        selectedNumbers = [];
-        for (let i = 0; i < 10; i++) {
-          if (i % 2 === 0) {
-            selectedNumbers.push(i);
-            console.log("Even buttons", selectedNumbers);
+      const buttons = document.querySelectorAll(".btn");
+      const specialButtons = document.querySelectorAll(".special");
+      let highlightedButtons = [];
+      let allSelectedNumbers = [];
+      
+      buttons.forEach(button => {
+        allSelectedNumbers = [];
+        button.addEventListener("click", () => {
+          let selectedNumber = parseInt(button.innerText);
+          if (highlightedButtons.includes(button.id)) {
+            button.classList.remove("highlighted");
+            highlightedButtons = highlightedButtons.filter(id => id !== button.id);
+            allSelectedNumbers.splice(allSelectedNumbers.indexOf(selectedNumber), 1);
+          } else {
+            button.classList.add("highlighted");
+            highlightedButtons.push(button.id);
+            allSelectedNumbers.push(selectedNumber);
           }
+          console.log(allSelectedNumbers);
+        });
+      });
+      
+    document.getElementById("even").addEventListener("click", () => {
+      highlightedButtons = [];
+      allSelectedNumbers = []; 
+      let even = [0, 2, 4, 6, 8];
+      buttons.forEach(button => {
+        let buttonNumber = parseInt(button.textContent);
+        if (even.includes(buttonNumber)) {
+          button.classList.add("highlighted");
+          highlightedButtons.push(button.id);
+          allSelectedNumbers.push(buttonNumber);
+        } else {
+          button.classList.remove("highlighted");
+          const index = allSelectedNumbers.indexOf(parseInt(button.textContent));
+            if (index !== -1) {
+              allSelectedNumbers.splice(index, 1);
+            }
         }
-      };
-
-      document.getElementById("oddButton").onclick = function() {
-        selectedNumbers = [];
-        for (let i = 0; i < 10; i++) {
-          if (i % 2 !== 0) {
-            selectedNumbers.push(i);
-            console.log("Odd buttons", selectedNumbers);
-          }
+      });
+      console.log(allSelectedNumbers);
+    });
+      
+    document.getElementById("odd").addEventListener("click", () => {
+      highlightedButtons = [];
+      allSelectedNumbers = []; 
+      let odd = [1, 3, 5, 7, 9];
+      buttons.forEach(button => {
+        let buttonNumber = parseInt(button.textContent);
+        if (odd.includes(buttonNumber)) {
+          button.classList.add("highlighted");
+          highlightedButtons.push(button.id);
+          allSelectedNumbers.push(buttonNumber);
+        } else {
+          button.classList.remove("highlighted");
+          const index = allSelectedNumbers.indexOf(parseInt(button.textContent));
+            if (index !== -1) {
+              allSelectedNumbers.splice(index, 1);
+            }
         }
-      };
+      });
+      console.log(allSelectedNumbers);
+    });
 
-      document.getElementById("smallButton").onclick = function() {
-        selectedNumbers = [];
-        for (let i = 0; i < 5; i++) {
-          selectedNumbers.push(i);
-          console.log("Small buttons", selectedNumbers);
+    document.getElementById("small").addEventListener("click", () => {
+      highlightedButtons = [];
+      allSelectedNumbers = []; 
+      let small = [0, 1, 2, 3, 4];
+      buttons.forEach(button => {
+        let buttonNumber = parseInt(button.textContent);
+        if (small.includes(buttonNumber)) {
+          button.classList.add("highlighted");
+          highlightedButtons.push(button.id);
+          allSelectedNumbers.push(buttonNumber);
+        } else {
+          button.classList.remove("highlighted");
+          const index = allSelectedNumbers.indexOf(parseInt(button.textContent));
+            if (index !== -1) {
+              allSelectedNumbers.splice(index, 1);
+            }
         }
-      };
+      });
+      console.log(allSelectedNumbers);
+    });
 
-      document.getElementById("bigButton").onclick = function() {
-        selectedNumbers = [];
-        for (let i = 5; i < 10; i++) {
-          selectedNumbers.push(i);
-          console.log("Big buttons", selectedNumbers);
+    document.getElementById("big").addEventListener("click", () => {
+      highlightedButtons = [];
+      allSelectedNumbers = []; 
+      let big = [5, 6, 7, 8, 9];
+      buttons.forEach(button => {
+        let buttonNumber = parseInt(button.textContent);
+        if (big.includes(buttonNumber)) {
+          button.classList.add("highlighted");
+          highlightedButtons.push(button.id);
+          allSelectedNumbers.push(buttonNumber);
+        } else {
+          button.classList.remove("highlighted");
+          const index = allSelectedNumbers.indexOf(parseInt(button.textContent));
+            if (index !== -1) {
+              allSelectedNumbers.splice(index, 1);
+            }
         }
-      };
+      });
+      console.log(allSelectedNumbers);
+    });
 
-      document.getElementById("allButton").onclick = function() {
-        selectedNumbers = [];
-        for (let i = 0; i < 10; i++) {
-          selectedNumbers.push(i);
-          console.log("All buttons", selectedNumbers);
+      document.getElementById("all").addEventListener("click", () => {
+      highlightedButtons = [];
+      allSelectedNumbers = []; 
+      let all = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      buttons.forEach(button => {
+        let buttonNumber = parseInt(button.textContent);
+        if (all.includes(buttonNumber)) {
+          button.classList.add("highlighted");
+          highlightedButtons.push(button.id);
+          allSelectedNumbers.push(buttonNumber);
+        } else {
+          button.classList.remove("highlighted");
+          const index = allSelectedNumbers.indexOf(parseInt(button.textContent));
+            if (index !== -1) {
+              allSelectedNumbers.splice(index, 1);
+            }
         }
-      };
+      });
+      console.log(allSelectedNumbers);
+    });
 
-
+      document.getElementById("clear").addEventListener("click", () => {
+      highlightedButtons = [];
+      allSelectedNumbers = []; 
+      let clear = [];
+      buttons.forEach(button => {
+        let buttonNumber = parseInt(button.textContent);
+          button.classList.remove("highlighted");
+          const index = allSelectedNumbers.indexOf(parseInt(button.textContent));
+            if (index !== -1) {
+              allSelectedNumbers.splice(index, 1);
+            }
+      });
+      console.log(allSelectedNumbers);
+    });
+      
+      document.getElement
     </script>
 </body>
 </html>
