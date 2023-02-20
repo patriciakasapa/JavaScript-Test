@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .submit {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .submit:hover {
+          background-color: #024420;
+    }
+
+    input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    #usersTable {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    #usersTable td, #usersTable th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    
+    #usersTable tr:nth-child(even){background-color: #f2f2f2;}
+    #usersTable tr:hover {background-color: #ddd;}
+    
+    #usersTable th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #ce310a;
+        color: white;
+    }
+
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" id="textInput">
+        <button class="submit" type="button" onclick="getInputValue();">Who am I</button>
+    </div>
+
+    <h1>User Data Table</h1>
+    <table id="usersTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    
+    <h1>Random Number Generator</h1>
+    <p>Draw: <span id="draws"></span></p>
+    <button onclick="resetDraws([0, 1, 2])">Reset</button>
+
+    <script>
+        function getInputValue() {
+            let value = document.getElementById("textInput").value;
+            alert(checkNumber(value));
+        }
+
+// Saturday task
+// given a function that accepts an input as parameter
+// if the input is divisible by 3 and 5 return "FizzBuzz"
+// if the input is divisible by 3 return "Fizz"
+// if the input is divisible by 5 return "Buzz"
+// if the input is not divisible by 3 or 5 or 3 and 5 return  input
+// if the input is not a number or integer return NaN
+
+        function checkNumber(input) {
+            let number = parseInt(input);
+
+            if (isNaN(number) || !Number.isInteger(number)) {
+            return "NaN";
+            } else if (number % 3 === 0 && number % 5 === 0) {
+            return "FizzBuzz";
+            } else if (number % 3 === 0) {
+            return "Fizz";
+            } else if (number % 5 === 0) {
+            return "Buzz";
+            } else {
+            return input;
+            }
+        }
+
+// a Write a program to fetch  data from https://jsonplaceholder.typicode.com/users
+//   Every one minute
+//   display the result in html table
+//   using Promise
+
+    function fetchUsers() {
+        return new Promise((resolve, reject) => {
+          fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(data => resolve(data))
+            .catch(error => reject(error));
+        });
+      }
+
+      function updateTable(data) {
+        const tableBody = document.querySelector('#usersTable tbody');
+        tableBody.innerHTML = '';
+
+        data.forEach(user => {
+          const row = tableBody.insertRow();
+
+          const idCell = row.insertCell(0);
+          const nameCell = row.insertCell(1);
+          const usernameCell = row.insertCell(2);
+          const emailCell = row.insertCell(3);
+          const phoneCell = row.insertCell(4);
+          const websiteCell = row.insertCell(5);
+
+          idCell.innerHTML = user.id;
+          nameCell.innerHTML = user.name;
+          usernameCell.innerHTML = user.username;
+          emailCell.innerHTML = user.email;
+          phoneCell.innerHTML = user.phone;
+          websiteCell.innerHTML = user.website;
+        });
+      }
+
+      setInterval(() => {
+        fetchUsers()
+          .then(data => {
+            updateTable(data);
+            console.log('Table updated');
+          })
+          .catch(error => console.error(error));
+      }, 10000);
+
+// b write a program to push 3 random numbers from 0 - 9 to an Array
+//   const draws [] every 1 minute
+//   display the draws in the browser
+//   Put a button on the web page
+//   onClick of the button  reset the drawing numbers to whatever 
+//   number is passed in as a parameter to the function
+
+ const draws = [];
+
+      function updateDraws() {
+        draws.length = 0;
+        draws.push(Math.floor(Math.random() * 10));
+        draws.push(Math.floor(Math.random() * 10));
+        draws.push(Math.floor(Math.random() * 10));
+
+        document.getElementById('draws').innerHTML = draws.join(' ');
+      }
+
+      setInterval(() => {
+        updateDraws();
+      }, 10000);
+
+      function resetDraws(defaultDraws) {
+        draws.length = 0;
+        draws.push(...defaultDraws);
+        document.getElementById('draws').innerHTML = draws.join(' ');
+      }
+
+// c given this Array of numbers [0,1,2,3,4,5,6,7,8,9]
+//   copy each of the numbers into a new array [[0],[1], ...]
+     const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+     const newArray = numbers.map((number) => [number]);
+     const newArrayOfArrays = JSON.stringify(newArray);
+     console.log(newArrayOfArrays);
+
+    </script>
+</body>
+</html>
