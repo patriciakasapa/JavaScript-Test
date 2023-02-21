@@ -29,7 +29,46 @@
           display:flex;
         }
 
-        .special {
+        .all-btn .special {
+          background-color: #520670;
+          border: 1px solid rgb(177, 62, 9);
+          color: white;
+          text-align: center;
+          text-decoration: none;
+          font-size: 12px;
+          cursor: pointer;
+          width: 60px;
+          padding: 8px 20px;
+          display: inline-block;
+          margin-top: 20px;
+        }
+
+        .special-all {
+          margin-left: 2px;
+          margin-right: 4px;
+        }
+
+        .clear-all .special {
+          background-color: #f50808;
+          border: 1px solid rgb(117, 41, 5);
+          color: white;
+          text-align: center;
+          text-decoration: none;
+          font-size: 12px;
+          cursor: pointer;
+          width: 60px;
+          padding: 8px 10px;
+          display: inline-block;
+          margin-top: 20px;
+        }
+
+        .special-clear-all {
+          margin-left: 2px;
+          margin-right: 4px;
+        }
+
+        .all-btn .special:hover {
+          background-color: #bf35e2;
         }
 
         .btn-group .special {
@@ -63,7 +102,7 @@
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
-        margin: 5px 895px;
+        margin: -65px 895px;
         cursor: pointer;
         position:absolute;
       }
@@ -151,6 +190,46 @@
           <button class="special special-row3" id="clear-row3">Clear</button>
         </div>
     </div>
+
+    <div>
+      <div class="all-btn">
+        <button class="special-all special" id="all0">All</button>
+        <button class="special-all special" id="all1">All</button>
+        <button class="special-all special" id="all2">All</button>
+        <button class="special-all special" id="all3">All</button>
+        <button class="special-all special" id="all4">All</button>
+        <button class="special-all special" id="all5">All</button>
+        <button class="special-all special" id="all6">All</button>
+        <button class="special-all special" id="all7">All</button>
+        <button class="special-all special" id="all8">All</button>
+        <button class="special-all special" id="all9">All</button>
+      </div>
+
+      <div class="clear-all">
+        <button class="special-clear-all special" id="clear0">Clear</button>
+        <button class="special-clear-all special" id="clear1">Clear</button>
+        <button class="special-clear-all special" id="clear2">Clear</button>
+        <button class="special-clear-all special" id="clear3">Clear</button>
+        <button class="special-clear-all special" id="clear4">Clear</button>
+        <button class="special-clear-all special" id="clear5">Clear</button>
+        <button class="special-clear-all special" id="clear6">Clear</button>
+        <button class="special-clear-all special" id="clear7">Clear</button>
+        <button class="special-clear-all special" id="clear8">Clear</button>
+        <button class="special-clear-all special" id="clear9">Clear</button>
+      </div>
+      <!-- <div>
+        <button class="btn btn-row3 numberButton" id="button0">0</button>
+        <button class="btn btn-row3 numberButton" id="button1">1</button>
+        <button class="btn btn-row3 numberButton" id="button2">2</button>
+        <button class="btn btn-row3 numberButton" id="button3">3</button>
+        <button class="btn btn-row3 numberButton" id="button4">4</button>
+        <button class="btn btn-row3 numberButton" id="button5">5</button>
+        <button class="btn btn-row3 numberButton" id="button6">6</button>
+        <button class="btn btn-row3 numberButton" id="button7">7</button>
+        <button class="btn btn-row3 numberButton" id="button8">8</button>
+        <button class="btn btn-row3 numberButton" id="button9">9</button>
+      </div> -->
+    </div>
     
     <button class="submit" id="submit">Submit</button>
 
@@ -234,7 +313,7 @@ if (count > 0) {
       const row3SpecialButtons = document.querySelectorAll(".special-row3");
       let row3HighlightedButtons = [];
       let row3AllSelectedNumbers = [];
-      
+
       // Row 1
       row1buttons.forEach(button => {
         row1AllSelectedNumbers = [];
@@ -649,6 +728,256 @@ if (count > 0) {
       });
       console.log(row3AllSelectedNumbers);
     });
+
+// Event listener for All Zeroes button
+document.getElementById("all0").addEventListener("click", () => {
+  const allZeroes = [0];
+  selectAllNumbers(allZeroes);
+});
+
+// Event listener for All Ones button
+document.getElementById("all1").addEventListener("click", () => {
+  const allOnes = [1];
+  selectAllNumbers(allOnes);
+});
+
+// Event listener for All Twos button
+document.getElementById("all2").addEventListener("click", () => {
+  const allTwos = [2];
+  selectAllNumbers(allTwos);
+});
+
+// Event listener for All Threes button
+document.getElementById("all3").addEventListener("click", () => {
+  const allThrees = [3];
+  selectAllNumbers(allThrees);
+});
+
+// Event listener for All Fours button
+document.getElementById("all4").addEventListener("click", () => {
+  const allFours = [4];
+  selectAllNumbers(allFours);
+});
+
+// Event listener for All Fives button
+document.getElementById("all5").addEventListener("click", () => {
+  const allFives = [5];
+  selectAllNumbers(allFives);
+});
+
+// Event listener for All Sixes button
+document.getElementById("all6").addEventListener("click", () => {
+  const allSixes = [6];
+  selectAllNumbers(allSixes);
+});
+
+// Event listener for All Sevens button
+document.getElementById("all7").addEventListener("click", () => {
+  const allSevens = [7];
+  selectAllNumbers(allSevens);
+});
+
+// Event listener for All Eights button
+document.getElementById("all8").addEventListener("click", () => {
+  const allEights = [8];
+  selectAllNumbers(allEights);
+});
+
+// Event listener for All Nines button
+document.getElementById("all9").addEventListener("click", () => {
+  const allNines = [9];
+  selectAllNumbers(allNines);
+});
+
+function selectAllNumbers(selectedNumbers) {
+
+  // Loop through each button in row 1
+  row1buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (selectedNumbers.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      if (!row1AllSelectedNumbers.includes(buttonNumber)) {
+        row1HighlightedButtons.push(button.id);
+        row1AllSelectedNumbers.push(buttonNumber);
+      }
+    } 
+  });
+  console.log(row1AllSelectedNumbers);
+
+  // Loop through each button in row 2
+  row2buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (selectedNumbers.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      if (!row2AllSelectedNumbers.includes(buttonNumber)) {
+        row2HighlightedButtons.push(button.id);
+        row2AllSelectedNumbers.push(buttonNumber);
+      }
+    } 
+  });
+  console.log(row2AllSelectedNumbers);
+
+  // Loop through each button in row 3
+  row3buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (selectedNumbers.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      if (!row3AllSelectedNumbers.includes(buttonNumber)) {
+        row3HighlightedButtons.push(button.id);
+        row3AllSelectedNumbers.push(buttonNumber);
+      }
+    } 
+  });
+  console.log(row3AllSelectedNumbers);
+}
+
+// Event listener for All Zeroes button
+document.getElementById("clear0").addEventListener("click", () => {
+  const allZeroes = [0];
+  clearAllNumbers("0", allZeroes);
+});
+
+// Event listener for All Ones button
+document.getElementById("clear1").addEventListener("click", () => {
+  const allOnes = [1];
+  clearAllNumbers("1", allOnes);
+});
+
+// Event listener for All Twos button
+document.getElementById("clear2").addEventListener("click", () => {
+  const allTwos = [2];
+  clearAllNumbers("2", allTwos);
+});
+
+// Event listener for All Threes button
+document.getElementById("clear3").addEventListener("click", () => {
+  const allThrees = [3];
+  clearAllNumbers("3", allThrees);
+});
+
+// Event listener for All Fours button
+document.getElementById("clear4").addEventListener("click", () => {
+  const allFours = [4];
+  clearAllNumbers("4", allFours);
+});
+
+// Event listener for All Fives button
+document.getElementById("clear5").addEventListener("click", () => {
+  const allFives = [5];
+  clearAllNumbers("5", allFives);
+});
+
+// Event listener for All Sixes button
+document.getElementById("clear6").addEventListener("click", () => {
+  const allSixes = [6];
+  clearAllNumbers("6", allSixes);
+});
+
+// Event listener for All Sevens button
+document.getElementById("clear7").addEventListener("click", () => {
+  const allSevens = [7];
+  clearAllNumbers("7", allSevens);
+});
+
+// Event listener for All Eights button
+document.getElementById("clear8").addEventListener("click", () => {
+  const allEights = [8];
+  clearAllNumbers("8", allEights);
+});
+
+// Event listener for All Nines button
+document.getElementById("clear9").addEventListener("click", () => {
+  const allNines = [9];
+  clearAllNumbers("9", allNines);
+});
+
+function clearAllNumbers(columnNum, selectedNumbers) {
+  const clearButton = document.getElementById(`clear${columnNum}`);
+  clearButton.classList.remove("highlighted");
+
+  switch (columnNum) {
+    case "0":
+      all0Selected = false;
+      all0HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all0HighlightedButtons = [];
+      all0SelectedNumbers = all0SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "1":
+      all1Selected = false;
+      all1HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all1HighlightedButtons = [];
+      all1SelectedNumbers = all1SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "2":
+      all2Selected = false;
+      all2HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all2HighlightedButtons = [];
+      all2SelectedNumbers = all2SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "3":
+      all3Selected = false;
+      all3HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all3HighlightedButtons = [];
+      all3SelectedNumbers = all3SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "4":
+      all4Selected = false;
+      all4HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all4HighlightedButtons = [];
+      all4SelectedNumbers = all4SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "5":
+      all5Selected = false;
+      all5HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all5HighlightedButtons = [];
+      all5SelectedNumbers = all5SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "6":
+      all6Selected = false;
+      all6HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all6HighlightedButtons = [];
+      all6SelectedNumbers = all6SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "7":
+      all7Selected = false;
+      all7HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all7HighlightedButtons = [];
+      all7SelectedNumbers = all7SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "8":
+      all8Selected = false;
+      all8HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all8HighlightedButtons = [];
+      all8SelectedNumbers = all8SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+    case "9":
+      all9Selected = false;
+      all9HighlightedButtons.forEach(button => {
+        button.classList.remove("highlighted");
+      });
+      all9HighlightedButtons = [];
+      all9SelectedNumbers = all9SelectedNumbers.filter(num => !selectedNumbers.includes(num));
+      break;
+  }
+}
 
     document.getElementById("submit").addEventListener("click", () => {
       let allSelectedNumbers = [];
