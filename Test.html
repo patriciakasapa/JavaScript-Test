@@ -118,10 +118,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-
-        <!-- 10 row1buttons numbered 0 to 9 -->
+<body>   
     <div class="row1 button-container">
+      <!-- 10 row1buttons numbered 0 to 9 -->
         <button class="btn btn-row1 numberButton" id="button0">0</button>
         <button class="btn btn-row1 numberButton" id="button1">1</button>
         <button class="btn btn-row1 numberButton" id="button2">2</button>
@@ -141,11 +140,11 @@
           <button class="special special-row1" id="big-row1">Big</button>
           <button class="special special-row1" id="all-row1">All</button>
           <button class="special special-row1" id="clear-row1">Clear</button>
-          <!-- <input type="text" id="myText"> -->
         </div>
     </div>
 
     <div class="row2 button-container">
+      <!-- 10 row2buttons numbered 0 to 9 -->
         <button class="btn btn-row2 numberButton" id="button0">0</button>
         <button class="btn btn-row2 numberButton" id="button1">1</button>
         <button class="btn btn-row2 numberButton" id="button2">2</button>
@@ -157,7 +156,7 @@
         <button class="btn btn-row2 numberButton" id="button8">8</button>
         <button class="btn btn-row2 numberButton" id="button9">9</button>
         
-        <!-- Other row1buttons -->
+        <!-- Other row2buttons -->
         <div class="btn-group">
           <button class="special special-row2" id="even-row2">Even</button>
           <button class="special special-row2" id="odd-row2">Odd</button>
@@ -169,6 +168,7 @@
     </div>
 
     <div class="row3 button-container">
+      <!-- 10 row3buttons numbered 0 to 9 -->
         <button class="btn btn-row3 numberButton" id="button0">0</button>
         <button class="btn btn-row3 numberButton" id="button1">1</button>
         <button class="btn btn-row3 numberButton" id="button2">2</button>
@@ -180,7 +180,7 @@
         <button class="btn btn-row3 numberButton" id="button8">8</button>
         <button class="btn btn-row3 numberButton" id="button9">9</button>
         
-        <!-- Other row1buttons -->
+        <!-- Other row3buttons -->
         <div class="btn-group">
           <button class="special special-row3" id="even-row3">Even</button>
           <button class="special special-row3" id="odd-row3">Odd</button>
@@ -192,6 +192,7 @@
     </div>
 
     <div>
+      <!-- Select all buttons in one column -->
       <div class="all-btn">
         <button class="special-all special" id="all0">All</button>
         <button class="special-all special" id="all1">All</button>
@@ -205,6 +206,7 @@
         <button class="special-all special" id="all9">All</button>
       </div>
 
+      <!-- Clear selection of all buttons in one column -->
       <div class="clear-all">
         <button class="special-clear-all special" id="clear0">Clear</button>
         <button class="special-clear-all special" id="clear1">Clear</button>
@@ -217,23 +219,11 @@
         <button class="special-clear-all special" id="clear8">Clear</button>
         <button class="special-clear-all special" id="clear9">Clear</button>
       </div>
-      <!-- <div>
-        <button class="btn btn-row3 numberButton" id="button0">0</button>
-        <button class="btn btn-row3 numberButton" id="button1">1</button>
-        <button class="btn btn-row3 numberButton" id="button2">2</button>
-        <button class="btn btn-row3 numberButton" id="button3">3</button>
-        <button class="btn btn-row3 numberButton" id="button4">4</button>
-        <button class="btn btn-row3 numberButton" id="button5">5</button>
-        <button class="btn btn-row3 numberButton" id="button6">6</button>
-        <button class="btn btn-row3 numberButton" id="button7">7</button>
-        <button class="btn btn-row3 numberButton" id="button8">8</button>
-        <button class="btn btn-row3 numberButton" id="button9">9</button>
-      </div> -->
     </div>
     
     <button class="submit" id="submit">Submit</button>
 
-<script>
+ <script>
 
 const bets = [[2,3,4,5,6], [7,6,5,4,3], [0,9,8,6,3], [1,3,5,7,9], [2,3,4,0,9],  [5,2,3,4,1]]
 
@@ -299,491 +289,509 @@ if (count > 0) {
 //When you click on either even,odd,small,big,all
 //push to an Array either even,odd,small,big,all
 
-      const row1buttons = document.querySelectorAll(".btn-row1");
-      const row1SpecialButtons = document.querySelectorAll(".special-row1");
-      let row1HighlightedButtons = [];
-      let row1AllSelectedNumbers = [];
+const row1buttons = document.querySelectorAll(".btn-row1");
+const row1SpecialButtons = document.querySelectorAll(".special-row1");
+let row1HighlightedButtons = [];
+let row1AllSelectedNumbers = [];
 
-      const row2buttons = document.querySelectorAll(".btn-row2");
-      const row2SpecialButtons = document.querySelectorAll(".special-row2");
-      let row2HighlightedButtons = [];
-      let row2AllSelectedNumbers = [];
+const row2buttons = document.querySelectorAll(".btn-row2");
+const row2SpecialButtons = document.querySelectorAll(".special-row2");
+let row2HighlightedButtons = [];
+let row2AllSelectedNumbers = [];
 
-      const row3buttons = document.querySelectorAll(".btn-row3");
-      const row3SpecialButtons = document.querySelectorAll(".special-row3");
-      let row3HighlightedButtons = [];
-      let row3AllSelectedNumbers = [];
+const row3buttons = document.querySelectorAll(".btn-row3");
+const row3SpecialButtons = document.querySelectorAll(".special-row3");
+let row3HighlightedButtons = [];
+let row3AllSelectedNumbers = [];
 
-      // Row 1
-      row1buttons.forEach(button => {
-        row1AllSelectedNumbers = [];
-        button.addEventListener("click", () => {
-          let selectedNumber = parseInt(button.innerText);
-          if (row1HighlightedButtons.includes(button.id)) {
-            button.classList.remove("highlighted");
-            row1HighlightedButtons = row1HighlightedButtons.filter(id => id !== button.id);
-            row1AllSelectedNumbers.splice(row1AllSelectedNumbers.indexOf(selectedNumber), 1);
-          } else {
-            button.classList.add("highlighted");
-            row1HighlightedButtons.push(button.id);
+// Row 1 functions
+row1buttons.forEach(button => {
+  row1AllSelectedNumbers = [];
+  button.addEventListener("click", () => {
+    let selectedNumber = parseInt(button.innerText);
+    if (row1HighlightedButtons.includes(button.id)) {
+      button.classList.remove("highlighted");
+      row1HighlightedButtons = row1HighlightedButtons.filter(id => id !== button.id);
+      row1AllSelectedNumbers.splice(row1AllSelectedNumbers.indexOf(selectedNumber), 1);
+    } else {
+      button.classList.add("highlighted");
+      row1HighlightedButtons.push(button.id);
             row1AllSelectedNumbers.push(selectedNumber);
-          }
-          console.log(row1AllSelectedNumbers);
-        });
-      });
-      
-    document.getElementById("even-row1").addEventListener("click", () => {
-      row1HighlightedButtons = [];
-      row1AllSelectedNumbers = []; 
-      let even = [0, 2, 4, 6, 8];
-      row1buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (even.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row1HighlightedButtons.push(button.id);
-          row1AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row1AllSelectedNumbers.splice(index, 1);
-            }
-        }
-      });
-      console.log(row1AllSelectedNumbers);
-    });
-      
-    document.getElementById("odd-row1").addEventListener("click", () => {
-      row1HighlightedButtons = [];
-      row1AllSelectedNumbers = []; 
-      let odd = [1, 3, 5, 7, 9];
-      row1buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (odd.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row1HighlightedButtons.push(button.id);
-          row1AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row1AllSelectedNumbers.splice(index, 1);
-            }
-        }
-      });
-      console.log(row1AllSelectedNumbers);
-    });
+    }
+    console.log(row1AllSelectedNumbers);
+  });
+});
 
-    document.getElementById("small-row1").addEventListener("click", () => {
-      row1HighlightedButtons = [];
-      row1AllSelectedNumbers = []; 
-      let small = [0, 1, 2, 3, 4];
-      row1buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (small.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row1HighlightedButtons.push(button.id);
-          row1AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row1AllSelectedNumbers.splice(index, 1);
-            }
+// Select all even numbers in row1
+document.getElementById("even-row1").addEventListener("click", () => {
+  row1HighlightedButtons = [];
+  row1AllSelectedNumbers = []; 
+  let even = [0, 2, 4, 6, 8];
+  row1buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (even.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row1HighlightedButtons.push(button.id);
+      row1AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row1AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row1AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row1AllSelectedNumbers);
+});
 
-    document.getElementById("big-row1").addEventListener("click", () => {
-      row1HighlightedButtons = [];
-      row1AllSelectedNumbers = []; 
-      let big = [5, 6, 7, 8, 9];
-      row1buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (big.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row1HighlightedButtons.push(button.id);
-          row1AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row1AllSelectedNumbers.splice(index, 1);
-            }
+// Select all odd numbers in row1
+document.getElementById("odd-row1").addEventListener("click", () => {
+  row1HighlightedButtons = [];
+  row1AllSelectedNumbers = []; 
+  let odd = [1, 3, 5, 7, 9];
+  row1buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (odd.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row1HighlightedButtons.push(button.id);
+      row1AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row1AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row1AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row1AllSelectedNumbers);
+});
 
-      document.getElementById("all-row1").addEventListener("click", () => {
-      row1HighlightedButtons = [];
-      row1AllSelectedNumbers = []; 
-      let all = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-      row1buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (all.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row1HighlightedButtons.push(button.id);
-          row1AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row1AllSelectedNumbers.splice(index, 1);
-            }
+// Select all small numbers in row1
+document.getElementById("small-row1").addEventListener("click", () => {
+  row1HighlightedButtons = [];
+  row1AllSelectedNumbers = []; 
+  let small = [0, 1, 2, 3, 4];
+  row1buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (small.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row1HighlightedButtons.push(button.id);
+      row1AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row1AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row1AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row1AllSelectedNumbers);
+});
 
-      document.getElementById("clear-row1").addEventListener("click", () => {
-      row1HighlightedButtons = [];
-      row1AllSelectedNumbers = []; 
-      let clear = [];
-      row1buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-          button.classList.remove("highlighted");
-          const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row1AllSelectedNumbers.splice(index, 1);
-            }
-      });
-      console.log(row1AllSelectedNumbers);
-    });
+// Select all big numbers in row1
+document.getElementById("big-row1").addEventListener("click", () => {
+  row1HighlightedButtons = [];
+  row1AllSelectedNumbers = []; 
+  let big = [5, 6, 7, 8, 9];
+  row1buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (big.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row1HighlightedButtons.push(button.id);
+      row1AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row1AllSelectedNumbers.splice(index, 1);
+        }
+    }
+  });
+  console.log(row1AllSelectedNumbers);
+});
 
-    // Row 2
-    row2buttons.forEach(button => {
-        row2AllSelectedNumbers = [];
-        button.addEventListener("click", () => {
-          let selectedNumber = parseInt(button.innerText);
-          if (row2HighlightedButtons.includes(button.id)) {
-            button.classList.remove("highlighted");
-            row2HighlightedButtons = row2HighlightedButtons.filter(id => id !== button.id);
+// Select all numbers in row1
+document.getElementById("all-row1").addEventListener("click", () => {
+  row1HighlightedButtons = [];
+  row1AllSelectedNumbers = []; 
+  let all = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  row1buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (all.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row1HighlightedButtons.push(button.id);
+      row1AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row1AllSelectedNumbers.splice(index, 1);
+        }
+    }
+  });
+  console.log(row1AllSelectedNumbers);
+});
+
+// Clear all selection in row1
+document.getElementById("clear-row1").addEventListener("click", () => {
+  row1HighlightedButtons = [];
+  row1AllSelectedNumbers = []; 
+  let clear = [];
+  row1buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+      button.classList.remove("highlighted");
+      const index = row1AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row1AllSelectedNumbers.splice(index, 1);
+        }
+  });
+  console.log(row1AllSelectedNumbers);
+});
+
+// Row 2 functions
+row2buttons.forEach(button => {
+    row2AllSelectedNumbers = [];
+    button.addEventListener("click", () => {
+      let selectedNumber = parseInt(button.innerText);
+      if (row2HighlightedButtons.includes(button.id)) {
+        button.classList.remove("highlighted");
+        row2HighlightedButtons = row2HighlightedButtons.filter(id => id !== button.id);
             row2AllSelectedNumbers.splice(row2AllSelectedNumbers.indexOf(selectedNumber), 1);
-          } else {
-            button.classList.add("highlighted");
-            row2HighlightedButtons.push(button.id);
-            row2AllSelectedNumbers.push(selectedNumber);
-          }
-          console.log(row2AllSelectedNumbers);
-        });
-      });
-      
-    document.getElementById("even-row2").addEventListener("click", () => {
-      row2HighlightedButtons = [];
-      row2AllSelectedNumbers = []; 
-      let even = [0, 2, 4, 6, 8];
-      row2buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (even.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row2HighlightedButtons.push(button.id);
-          row2AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row2AllSelectedNumbers.splice(index, 1);
-            }
-        }
-      });
+      } else {
+        button.classList.add("highlighted");
+        row2HighlightedButtons.push(button.id);
+        row2AllSelectedNumbers.push(selectedNumber);
+      }
       console.log(row2AllSelectedNumbers);
     });
-      
-    document.getElementById("odd-row2").addEventListener("click", () => {
-      row2HighlightedButtons = [];
-      row2AllSelectedNumbers = []; 
-      let odd = [1, 3, 5, 7, 9];
-      row2buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (odd.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row2HighlightedButtons.push(button.id);
-          row2AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row2AllSelectedNumbers.splice(index, 1);
-            }
+});
+
+// Select all even numbers in row2
+document.getElementById("even-row2").addEventListener("click", () => {
+  row2HighlightedButtons = [];
+  row2AllSelectedNumbers = []; 
+  let even = [0, 2, 4, 6, 8];
+  row2buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (even.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row2HighlightedButtons.push(button.id);
+      row2AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row2AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row2AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row2AllSelectedNumbers);
+});
 
-    document.getElementById("small-row2").addEventListener("click", () => {
-      row2HighlightedButtons = [];
-      row2AllSelectedNumbers = []; 
-      let small = [0, 1, 2, 3, 4];
-      row2buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (small.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row2HighlightedButtons.push(button.id);
-          row2AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row2AllSelectedNumbers.splice(index, 1);
-            }
+// Select all odd numbers in row2
+document.getElementById("odd-row2").addEventListener("click", () => {
+  row2HighlightedButtons = [];
+  row2AllSelectedNumbers = []; 
+  let odd = [1, 3, 5, 7, 9];
+  row2buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (odd.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row2HighlightedButtons.push(button.id);
+      row2AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row2AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row2AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row2AllSelectedNumbers);
+});
 
-    document.getElementById("big-row2").addEventListener("click", () => {
-      row2HighlightedButtons = [];
-      row2AllSelectedNumbers = []; 
-      let big = [5, 6, 7, 8, 9];
-      row2buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (big.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row2HighlightedButtons.push(button.id);
-          row2AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row2AllSelectedNumbers.splice(index, 1);
-            }
+// Select all small numbers in row2
+document.getElementById("small-row2").addEventListener("click", () => {
+  row2HighlightedButtons = [];
+  row2AllSelectedNumbers = []; 
+  let small = [0, 1, 2, 3, 4];
+  row2buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (small.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row2HighlightedButtons.push(button.id);
+      row2AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row2AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row2AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row2AllSelectedNumbers);
+});
 
-      document.getElementById("all-row2").addEventListener("click", () => {
-      row2HighlightedButtons = [];
-      row2AllSelectedNumbers = []; 
-      let all = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-      row2buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (all.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row2HighlightedButtons.push(button.id);
-          row2AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row2AllSelectedNumbers.splice(index, 1);
-            }
+// Select all big numbers in row2
+document.getElementById("big-row2").addEventListener("click", () => {
+  row2HighlightedButtons = [];
+  row2AllSelectedNumbers = []; 
+  let big = [5, 6, 7, 8, 9];
+  row2buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (big.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row2HighlightedButtons.push(button.id);
+      row2AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row2AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row2AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row2AllSelectedNumbers);
+});
 
-      document.getElementById("clear-row2").addEventListener("click", () => {
-      row2HighlightedButtons = [];
-      row2AllSelectedNumbers = []; 
-      let clear = [];
-      row2buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-          button.classList.remove("highlighted");
-          const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row2AllSelectedNumbers.splice(index, 1);
-            }
-      });
-      console.log(row2AllSelectedNumbers);
-    });
-
-
-     // Row 3 button actions
-     row3buttons.forEach(button => {
-        row3AllSelectedNumbers = [];
-        button.addEventListener("click", () => {
-          let selectedNumber = parseInt(button.innerText);
-          if (row3HighlightedButtons.includes(button.id)) {
-            button.classList.remove("highlighted");
-            row3HighlightedButtons = row3HighlightedButtons.filter(id => id !== button.id);
-            row3AllSelectedNumbers.splice(row3AllSelectedNumbers.indexOf(selectedNumber), 1);
-          } else {
-            button.classList.add("highlighted");
-            row3HighlightedButtons.push(button.id);
-            row3AllSelectedNumbers.push(selectedNumber);
-          }
-          console.log(row3AllSelectedNumbers);
-        });
-      });
-      
-    document.getElementById("even-row3").addEventListener("click", () => {
-      row3HighlightedButtons = [];
-      row3AllSelectedNumbers = []; 
-      let even = [0, 2, 4, 6, 8];
-      row3buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (even.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row3HighlightedButtons.push(button.id);
-          row3AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row3AllSelectedNumbers.splice(index, 1);
-            }
+// Select all numbers in row2
+document.getElementById("all-row2").addEventListener("click", () => {
+  row2HighlightedButtons = [];
+  row2AllSelectedNumbers = []; 
+  let all = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  row2buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (all.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row2HighlightedButtons.push(button.id);
+      row2AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row2AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row3AllSelectedNumbers);
-    });
-      
-    document.getElementById("odd-row3").addEventListener("click", () => {
-      row3HighlightedButtons = [];
-      row3AllSelectedNumbers = []; 
-      let odd = [1, 3, 5, 7, 9];
-      row3buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (odd.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row3HighlightedButtons.push(button.id);
-          row3AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row3AllSelectedNumbers.splice(index, 1);
-            }
+    }
+  });
+  console.log(row2AllSelectedNumbers);
+});
+
+// Clear all selection in row2
+document.getElementById("clear-row2").addEventListener("click", () => {
+  row2HighlightedButtons = [];
+  row2AllSelectedNumbers = []; 
+  let clear = [];
+  row2buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+      button.classList.remove("highlighted");
+      const index = row2AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row2AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row3AllSelectedNumbers);
-    });
+  });
+  console.log(row2AllSelectedNumbers);
+});
 
-    document.getElementById("small-row3").addEventListener("click", () => {
-      row3HighlightedButtons = [];
-      row3AllSelectedNumbers = []; 
-      let small = [0, 1, 2, 3, 4];
-      row3buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (small.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row3HighlightedButtons.push(button.id);
-          row3AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row3AllSelectedNumbers.splice(index, 1);
-            }
+
+// Row 3 button actions
+row3buttons.forEach(button => {
+  row3AllSelectedNumbers = [];
+  button.addEventListener("click", () => {
+    let selectedNumber = parseInt(button.innerText);
+    if (row3HighlightedButtons.includes(button.id)) {
+      button.classList.remove("highlighted");
+      row3HighlightedButtons = row3HighlightedButtons.filter(id => id !== button.id);
+      row3AllSelectedNumbers.splice(row3AllSelectedNumbers.indexOf(selectedNumber), 1);
+    } else {
+      button.classList.add("highlighted");
+      row3HighlightedButtons.push(button.id);
+      row3AllSelectedNumbers.push(selectedNumber);
+    }
+    console.log(row3AllSelectedNumbers);
+  });
+});
+
+// Select all even numbers in row3
+document.getElementById("even-row3").addEventListener("click", () => {
+  row3HighlightedButtons = [];
+  row3AllSelectedNumbers = []; 
+  let even = [0, 2, 4, 6, 8];
+  row3buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (even.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row3HighlightedButtons.push(button.id);
+      row3AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row3AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row3AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row3AllSelectedNumbers);
+});
 
-    document.getElementById("big-row3").addEventListener("click", () => {
-      row3HighlightedButtons = [];
-      row3AllSelectedNumbers = []; 
-      let big = [5, 6, 7, 8, 9];
-      row3buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (big.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row3HighlightedButtons.push(button.id);
-          row3AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row3AllSelectedNumbers.splice(index, 1);
-            }
+// Select all odd numbers in row3
+document.getElementById("odd-row3").addEventListener("click", () => {
+  row3HighlightedButtons = [];
+  row3AllSelectedNumbers = []; 
+  let odd = [1, 3, 5, 7, 9];
+  row3buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (odd.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row3HighlightedButtons.push(button.id);
+      row3AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row3AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row3AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row3AllSelectedNumbers);
+});
 
-      document.getElementById("all-row3").addEventListener("click", () => {
-      row3HighlightedButtons = [];
-      row3AllSelectedNumbers = []; 
-      let all = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-      row3buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-        if (all.includes(buttonNumber)) {
-          button.classList.add("highlighted");
-          row3HighlightedButtons.push(button.id);
-          row3AllSelectedNumbers.push(buttonNumber);
-        } else {
-          button.classList.remove("highlighted");
-          const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row3AllSelectedNumbers.splice(index, 1);
-            }
+// Select all small numbers in row3
+document.getElementById("small-row3").addEventListener("click", () => {
+  row3HighlightedButtons = [];
+  row3AllSelectedNumbers = []; 
+  let small = [0, 1, 2, 3, 4];
+  row3buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (small.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row3HighlightedButtons.push(button.id);
+      row3AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row3AllSelectedNumbers.splice(index, 1);
         }
-      });
-      console.log(row3AllSelectedNumbers);
-    });
+    }
+  });
+  console.log(row3AllSelectedNumbers);
+});
 
-      document.getElementById("clear-row3").addEventListener("click", () => {
-      row3HighlightedButtons = [];
-      row3AllSelectedNumbers = []; 
-      let clear = [];
-      row3buttons.forEach(button => {
-        let buttonNumber = parseInt(button.textContent);
-          button.classList.remove("highlighted");
-          const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
-            if (index !== -1) {
-              row3AllSelectedNumbers.splice(index, 1);
-            }
-      });
-      console.log(row3AllSelectedNumbers);
-    });
+// Select all big numbers in row3
+document.getElementById("big-row3").addEventListener("click", () => {
+  row3HighlightedButtons = [];
+  row3AllSelectedNumbers = []; 
+  let big = [5, 6, 7, 8, 9];
+  row3buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (big.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row3HighlightedButtons.push(button.id);
+      row3AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row3AllSelectedNumbers.splice(index, 1);
+        }
+    }
+  });
+  console.log(row3AllSelectedNumbers);
+});
 
-// Event listener for All Zeroes button
+// Select all numbers in row3
+document.getElementById("all-row3").addEventListener("click", () => {
+  row3HighlightedButtons = [];
+  row3AllSelectedNumbers = []; 
+  let all = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  row3buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    if (all.includes(buttonNumber)) {
+      button.classList.add("highlighted");
+      row3HighlightedButtons.push(button.id);
+      row3AllSelectedNumbers.push(buttonNumber);
+    } else {
+      button.classList.remove("highlighted");
+      const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row3AllSelectedNumbers.splice(index, 1);
+        }
+    }
+  });
+  console.log(row3AllSelectedNumbers);
+});
+
+// Clear all selection in row3
+document.getElementById("clear-row3").addEventListener("click", () => {
+  row3HighlightedButtons = [];
+  row3AllSelectedNumbers = []; 
+  let clear = [];
+  row3buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+      button.classList.remove("highlighted");
+      const index = row3AllSelectedNumbers.indexOf(parseInt(button.textContent));
+        if (index !== -1) {
+          row3AllSelectedNumbers.splice(index, 1);
+        }
+  });
+  console.log(row3AllSelectedNumbers);
+});
+
+// Event listener for All Zero buttons
 document.getElementById("all0").addEventListener("click", () => {
   const allZeroes = [0];
   selectAllNumbers(allZeroes);
 });
 
-// Event listener for All Ones button
+// Event listener for All One buttons
 document.getElementById("all1").addEventListener("click", () => {
   const allOnes = [1];
   selectAllNumbers(allOnes);
 });
 
-// Event listener for All Twos button
+// Event listener for All Two buttons
 document.getElementById("all2").addEventListener("click", () => {
   const allTwos = [2];
   selectAllNumbers(allTwos);
 });
 
-// Event listener for All Threes button
+// Event listener for All Three buttons
 document.getElementById("all3").addEventListener("click", () => {
   const allThrees = [3];
   selectAllNumbers(allThrees);
 });
 
-// Event listener for All Fours button
+// Event listener for All Four buttons
 document.getElementById("all4").addEventListener("click", () => {
   const allFours = [4];
   selectAllNumbers(allFours);
 });
 
-// Event listener for All Fives button
+// Event listener for All Five buttons
 document.getElementById("all5").addEventListener("click", () => {
   const allFives = [5];
   selectAllNumbers(allFives);
 });
 
-// Event listener for All Sixes button
+// Event listener for All Six buttons
 document.getElementById("all6").addEventListener("click", () => {
   const allSixes = [6];
   selectAllNumbers(allSixes);
 });
 
-// Event listener for All Sevens button
+// Event listener for All Seven buttons
 document.getElementById("all7").addEventListener("click", () => {
   const allSevens = [7];
   selectAllNumbers(allSevens);
 });
 
-// Event listener for All Eights button
+// Event listener for All Eight buttons
 document.getElementById("all8").addEventListener("click", () => {
   const allEights = [8];
   selectAllNumbers(allEights);
 });
 
-// Event listener for All Nines button
+// Event listener for All Nine buttons
 document.getElementById("all9").addEventListener("click", () => {
   const allNines = [9];
   selectAllNumbers(allNines);
@@ -791,7 +799,7 @@ document.getElementById("all9").addEventListener("click", () => {
 
 function selectAllNumbers(selectedNumbers) {
 
-  // Loop through each button in row 1
+  // Loop through each button in row 1 to select
   row1buttons.forEach(button => {
     let buttonNumber = parseInt(button.textContent);
     if (selectedNumbers.includes(buttonNumber)) {
@@ -803,8 +811,9 @@ function selectAllNumbers(selectedNumbers) {
     } 
   });
   console.log(row1AllSelectedNumbers);
+  
 
-  // Loop through each button in row 2
+  // Loop through each button in row 2 to select
   row2buttons.forEach(button => {
     let buttonNumber = parseInt(button.textContent);
     if (selectedNumbers.includes(buttonNumber)) {
@@ -817,7 +826,7 @@ function selectAllNumbers(selectedNumbers) {
   });
   console.log(row2AllSelectedNumbers);
 
-  // Loop through each button in row 3
+  // Loop through each button in row 3 to select
   row3buttons.forEach(button => {
     let buttonNumber = parseInt(button.textContent);
     if (selectedNumbers.includes(buttonNumber)) {
@@ -831,61 +840,61 @@ function selectAllNumbers(selectedNumbers) {
   console.log(row3AllSelectedNumbers);
 }
 
-// Event listener for All Zeroes button
+// Event listener for clearing Zero buttons
 document.getElementById("clear0").addEventListener("click", () => {
   const allZeroes = [0];
   clearAllNumbers("0", allZeroes);
 });
 
-// Event listener for All Ones button
+// Event listener for clearing One buttons
 document.getElementById("clear1").addEventListener("click", () => {
   const allOnes = [1];
   clearAllNumbers("1", allOnes);
 });
 
-// Event listener for All Twos button
+// Event listener for clearing Two buttons
 document.getElementById("clear2").addEventListener("click", () => {
   const allTwos = [2];
   clearAllNumbers("2", allTwos);
 });
 
-// Event listener for All Threes button
+// Event listener for clearing Three buttons
 document.getElementById("clear3").addEventListener("click", () => {
   const allThrees = [3];
   clearAllNumbers("3", allThrees);
 });
 
-// Event listener for All Fours button
+// Event listener for clearing Four buttons
 document.getElementById("clear4").addEventListener("click", () => {
   const allFours = [4];
   clearAllNumbers("4", allFours);
 });
 
-// Event listener for All Fives button
+// Event listener for clearing Five buttons
 document.getElementById("clear5").addEventListener("click", () => {
   const allFives = [5];
   clearAllNumbers("5", allFives);
 });
 
-// Event listener for All Sixes button
+// Event listener for clearing Six buttons
 document.getElementById("clear6").addEventListener("click", () => {
   const allSixes = [6];
   clearAllNumbers("6", allSixes);
 });
 
-// Event listener for All Sevens button
+// Event listener for clearing Seven buttons
 document.getElementById("clear7").addEventListener("click", () => {
   const allSevens = [7];
   clearAllNumbers("7", allSevens);
 });
 
-// Event listener for All Eights button
+// Event listener for clearing Eight buttons
 document.getElementById("clear8").addEventListener("click", () => {
   const allEights = [8];
   clearAllNumbers("8", allEights);
 });
 
-// Event listener for All Nines button
+// Event listener for clearing Nine buttons
 document.getElementById("clear9").addEventListener("click", () => {
   const allNines = [9];
   clearAllNumbers("9", allNines);
@@ -893,100 +902,69 @@ document.getElementById("clear9").addEventListener("click", () => {
 
 function clearAllNumbers(columnNum, selectedNumbers) {
   const clearButton = document.getElementById(`clear${columnNum}`);
-  clearButton.classList.remove("highlighted");
 
-  switch (columnNum) {
-    case "0":
-      all0Selected = false;
-      all0HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all0HighlightedButtons = [];
-      all0SelectedNumbers = all0SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "1":
-      all1Selected = false;
-      all1HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all1HighlightedButtons = [];
-      all1SelectedNumbers = all1SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "2":
-      all2Selected = false;
-      all2HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all2HighlightedButtons = [];
-      all2SelectedNumbers = all2SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "3":
-      all3Selected = false;
-      all3HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all3HighlightedButtons = [];
-      all3SelectedNumbers = all3SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "4":
-      all4Selected = false;
-      all4HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all4HighlightedButtons = [];
-      all4SelectedNumbers = all4SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "5":
-      all5Selected = false;
-      all5HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all5HighlightedButtons = [];
-      all5SelectedNumbers = all5SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "6":
-      all6Selected = false;
-      all6HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all6HighlightedButtons = [];
-      all6SelectedNumbers = all6SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "7":
-      all7Selected = false;
-      all7HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all7HighlightedButtons = [];
-      all7SelectedNumbers = all7SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "8":
-      all8Selected = false;
-      all8HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all8HighlightedButtons = [];
-      all8SelectedNumbers = all8SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-    case "9":
-      all9Selected = false;
-      all9HighlightedButtons.forEach(button => {
-        button.classList.remove("highlighted");
-      });
-      all9HighlightedButtons = [];
-      all9SelectedNumbers = all9SelectedNumbers.filter(num => !selectedNumbers.includes(num));
-      break;
-  }
+  // Loop through each button in row 1 to clear
+  row1buttons.forEach(button => {
+  let buttonNumber = parseInt(button.textContent);
+  if (selectedNumbers.includes(buttonNumber)) {
+    button.classList.remove("highlighted");}
+  });
+  row1AllSelectedNumbers = row1AllSelectedNumbers.filter(num => !selectedNumbers.includes(num));
+  console.log(row1AllSelectedNumbers);
+
+  // Loop through each button in row 2 to clear
+  row2buttons.forEach(button => {
+  let buttonNumber = parseInt(button.textContent);
+  if (selectedNumbers.includes(buttonNumber)) {
+    button.classList.remove("highlighted");}
+  });
+  row2AllSelectedNumbers = row2AllSelectedNumbers.filter(num => !selectedNumbers.includes(num));
+  console.log(row2AllSelectedNumbers);
+
+  // Loop through each button in row 3 to clear
+  row3buttons.forEach(button => {
+  let buttonNumber = parseInt(button.textContent);
+  if (selectedNumbers.includes(buttonNumber)) {
+    button.classList.remove("highlighted");}
+  });
+  row3AllSelectedNumbers = row3AllSelectedNumbers.filter(num => !selectedNumbers.includes(num));
+  console.log(row3AllSelectedNumbers);
+
 }
 
-    document.getElementById("submit").addEventListener("click", () => {
-      let allSelectedNumbers = [];
-      allSelectedNumbers.push(row1AllSelectedNumbers);
-      allSelectedNumbers.push(row2AllSelectedNumbers);
-      allSelectedNumbers.push(row3AllSelectedNumbers);
-      let mergedRowsArray = JSON.stringify(allSelectedNumbers);
-      console.log("Selected numbers from all rows: ", mergedRowsArray);
-    });
+// Submit the selection made and clear
+document.getElementById("submit").addEventListener("click", () => {
+  let allSelectedNumbers = [];
+  allSelectedNumbers.push(row1AllSelectedNumbers);
+  allSelectedNumbers.push(row2AllSelectedNumbers);
+  allSelectedNumbers.push(row3AllSelectedNumbers);
+  let mergedRowsArray = JSON.stringify(allSelectedNumbers);
+  console.log("Selected numbers from all rows: ", mergedRowsArray);
+
+  // clear row 1 after submission
+  row1buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    button.classList.remove("highlighted");
+    row1AllSelectedNumbers = [];
+  });
+  console.log(row1AllSelectedNumbers);
+
+  // clear row 1 after submission
+  row2buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    button.classList.remove("highlighted");
+    row2AllSelectedNumbers = [];
+  });
+  console.log(row2AllSelectedNumbers);
+
+  // clear row 1 after submission
+  row3buttons.forEach(button => {
+    let buttonNumber = parseInt(button.textContent);
+    button.classList.remove("highlighted");
+    row3AllSelectedNumbers = [];
+  });
+  console.log(row3AllSelectedNumbers);
+});
       
       document.getElement
     </script>
