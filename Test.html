@@ -111,6 +111,50 @@
           background-color: #024420;
         }
 
+        #card {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         width:50%;
+         margin-top: 1%;
+        }
+
+        #draw-numbers {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 20px;
+        }
+
+        .number {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: #f0f0f0;
+          color: #333;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 24px;
+          font-weight: bold;
+          margin-right: 10px;
+        }
+
+        #result {
+          display: flex;
+          justify-content: center;
+          margin-top: 5px;
+          font-size: 18px;
+          font-weight: bold;
+        }
+
+        #result.match {
+          color: green;
+        }
+
+        #result.nomatch {
+          color: red;
+        }
+
 
       </style>
     <meta charset="UTF-8">
@@ -120,7 +164,7 @@
 </head>
 <body>   
     <div class="row1 button-container">
-      <!-- 10 row1buttons numbered 0 to 9 -->
+      <!-- 10 row 1 buttons numbered 0 to 9 -->
         <button class="btn btn-row1 numberButton" id="button0">0</button>
         <button class="btn btn-row1 numberButton" id="button1">1</button>
         <button class="btn btn-row1 numberButton" id="button2">2</button>
@@ -132,7 +176,7 @@
         <button class="btn btn-row1 numberButton" id="button8">8</button>
         <button class="btn btn-row1 numberButton" id="button9">9</button>
         
-        <!-- Other row1buttons -->
+        <!-- Other row 1 buttons -->
         <div class="btn-group">
           <button class="special special-row1" id="even-row1">Even</button>
           <button class="special special-row1" id="odd-row1">Odd</button>
@@ -144,7 +188,7 @@
     </div>
 
     <div class="row2 button-container">
-      <!-- 10 row2buttons numbered 0 to 9 -->
+      <!-- 10 row 2 buttons numbered 0 to 9 -->
         <button class="btn btn-row2 numberButton" id="button0">0</button>
         <button class="btn btn-row2 numberButton" id="button1">1</button>
         <button class="btn btn-row2 numberButton" id="button2">2</button>
@@ -156,7 +200,7 @@
         <button class="btn btn-row2 numberButton" id="button8">8</button>
         <button class="btn btn-row2 numberButton" id="button9">9</button>
         
-        <!-- Other row2buttons -->
+        <!-- Other row 2 buttons -->
         <div class="btn-group">
           <button class="special special-row2" id="even-row2">Even</button>
           <button class="special special-row2" id="odd-row2">Odd</button>
@@ -168,7 +212,7 @@
     </div>
 
     <div class="row3 button-container">
-      <!-- 10 row3buttons numbered 0 to 9 -->
+      <!-- 10 row 3 buttons numbered 0 to 9 -->
         <button class="btn btn-row3 numberButton" id="button0">0</button>
         <button class="btn btn-row3 numberButton" id="button1">1</button>
         <button class="btn btn-row3 numberButton" id="button2">2</button>
@@ -180,7 +224,7 @@
         <button class="btn btn-row3 numberButton" id="button8">8</button>
         <button class="btn btn-row3 numberButton" id="button9">9</button>
         
-        <!-- Other row3buttons -->
+        <!-- Other row 3 buttons -->
         <div class="btn-group">
           <button class="special special-row3" id="even-row3">Even</button>
           <button class="special special-row3" id="odd-row3">Odd</button>
@@ -220,8 +264,14 @@
         <button class="special-clear-all special" id="clear9">Clear</button>
       </div>
     </div>
-    
+
     <button class="submit" id="submit">Submit</button>
+
+      <div id="card">
+        <h2>Machine Draw</h2>
+        <div id="draw-numbers"></div>
+        <div id="result"></div>
+      </div>
 
  <script>
 
@@ -940,6 +990,50 @@ document.getElementById("submit").addEventListener("click", () => {
   allSelectedNumbers.push(row3AllSelectedNumbers);
   let mergedRowsArray = JSON.stringify(allSelectedNumbers);
   console.log("Selected numbers from all rows: ", mergedRowsArray);
+
+  let combinations = [];
+  for (let i = 0; i < row1AllSelectedNumbers.length; i++) {
+    for (let j = 0; j < row2AllSelectedNumbers.length; j++) {
+      for (let k = 0; k < row3AllSelectedNumbers.length; k++) {
+        // combinations.push([row1AllSelectedNumbers[i], row2AllSelectedNumbers[j], row3AllSelectedNumbers[k]]);
+        const currentCombination = [row1AllSelectedNumbers[i], row2AllSelectedNumbers[j], row3AllSelectedNumbers[k]];
+        const uniqueCombination = [...new Set(currentCombination)];
+        if (uniqueCombination.length === currentCombination.length) {
+          combinations.push(currentCombination);
+        }
+      }
+    }
+  }
+  console.log(JSON.stringify(combinations)); 
+
+  let totalBets = combinations.length;
+  console.log("Total number of bets: ", totalBets);
+
+  const machineDraw = [1, 5, 2, 7, 6];
+  const card = document.getElementById("card");
+  const drawNumbers = document.getElementById("draw-numbers");
+  const result = document.getElementById("result");
+  
+  for (let i = 0; i < machineDraw.length; i++) {
+    const number = document.createElement("div");
+    number.textContent = machineDraw[i];
+    number.classList.add("number");
+    drawNumbers.appendChild(number);
+  }
+
+  if (JSON.stringify(machineDraw) === JSON.stringify(row1AllSelectedNumbers.slice(0, machineDraw.length))) {
+    result.textContent = "Row 1 matched in the same order!";
+    result.classList.add("match");
+  } else if (JSON.stringify(machineDraw) === JSON.stringify(row2AllSelectedNumbers.slice(0, machineDraw.length))) {
+    result.textContent = "Row 2 matched in the same order!";
+    result.classList.add("match");
+  } else if (JSON.stringify(machineDraw) === JSON.stringify(row3AllSelectedNumbers.slice(0, machineDraw.length))) {
+    result.textContent = "Row 3 matched in the same order!";
+    result.classList.add("match");
+  } else {
+    result.textContent = "No row matched in the same order.";
+    result.classList.add("nomatch");
+  }
 
   // clear row 1 after submission
   row1buttons.forEach(button => {
