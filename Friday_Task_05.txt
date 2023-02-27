@@ -8,18 +8,18 @@ Task 2.  Assuming this is the user selection [ [1,0,5,7,4], [3,5,7,8,2], [3,6,8,
 a. Check if any of the user selection array's first and last element sums up to the machine number array's first and last element.
 b. Console the number of user selection that matched the sum of the machine number
 c. Console how many of the bets won
-d. Console how many of the bets losts
+d. Console how many of the bets lost
 
-Task 3. In royal 5, grouop 60 game, you need to select at least one number from the first row and three numbers from the second row to form a bet. 
+Task 3. In royal 5, group 60 game, you need to select at least one number from the first row and three numbers from the second row to form a bet. 
 If the user selection on the first row = [2,3,4,5,6,7,8,9] and the selection on the second row = [8,7,9,2,3,4,5]
-a. How many bets will the user have. Show working, i dont want laggy formulae
+a. How many bets will the user have. Show working, i don't want laggy formulae
 b. Sort the user selection and console log your result
 
 Task 4. Write a simple restful api that returns draw number in json format.
 use mysql for our data repository
 a. /5d should return 5 draw numbers randomly
 b, /3d should return 3 draw numbers randomly
-c. /fast3 should return 3 draw numberrandomly
+c. /fast3 should return 3 draw number randomly
 d. /double should return 5 draw numbers in this format [xx,xx,xx,xx,xx]
 
 Task 5. Look at royal 5 game group 30 replicate the game and it functionality. 
