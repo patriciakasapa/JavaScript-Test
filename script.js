@@ -53,32 +53,6 @@ const bets = [
     console.log("Draw number does not appear in the bets array.");
   }
 
-
-//   function generatePermutations(arr) {
-//     if (arr.length < 5) {
-//       return [];
-//     }
-//     const n = 5; // group size
-//     const permutations = [];
-//     const getPermutations = (arr, n, prefix = []) => {
-//       if (prefix.length === n) {
-//         permutations.push(prefix);
-//         return;
-//       }
-//       for (let i = 0; i < arr.length; i++) {
-//         const subArr = arr.slice();
-//         subArr.splice(i, 1);
-//         getPermutations(subArr, n, [...prefix, arr[i]]);
-//       }
-//     };
-//     getPermutations(arr, n);
-//     return permutations;
-//   }
-
-//   const selectedNumbers = [1, 2, 3, 0, 8, 6];
-// const permutations = generatePermutations(selectedNumbers);
-// console.log("Pems: " + permutations.length, JSON.stringify(permutations));
-
   //task 2
   // a. write a program to display 10 row1buttons 0 - 9
   // let selectedNumbers = [];
@@ -93,72 +67,138 @@ const bets = [
   //When you click on either even,odd,small,big,all
   //push to an Array either even,odd,small,big,all
 
-  const machineDraw = [];
-    const card = document.getElementById("card");
-    const drawNumbers = document.getElementById("draw-numbers");
-    const result = document.getElementById("result");
-    const wait = document.getElementById("wait");
+  
+function getDrawnumbers() {
+    const machineDraw = [];
 
     // Generate initial draw numbers
+    let output = '';
     for (let i = 0; i < 5; i++) {
         machineDraw.push(Math.floor(Math.random() * 10));
-        const number = document.createElement("div");
-        number.textContent = machineDraw[i];
-        number.classList.add("drawNumber");
-        drawNumbers.appendChild(number);
+        output += `<div class="drawNumber">${machineDraw[i]}</div>`;
     }
 
-    function startTimer() {
-let timerElement = document.getElementById("timer");
-if (!timerElement) {
-    console.error("Missing timer element.");
-    return;
+    document.querySelector("#draw-numbers").innerHTML = output;
 }
 
-let countdown = parseInt(localStorage.getItem("timer")) || 10;
-console.log("Starting countdown:", countdown);
+    // function startTimer() {
 
-let intervalId = setInterval(() => {
-    countdown--;
-    console.log("Countdown:", countdown);
+      
+       
+        // let timeRemaining = parseInt(localStorage.getItem("timer")) || 10;
+        // let randomNumber = parseInt(localStorage.getItem("timer")) || 10;
+        // localStorage.setItem("timeRemaining", timeRemaining);
+
+        // const intervalId = setInterval(() => {
+        //     timeRemaining -=1
+        //   }, 1000);
+       
+        //   if (timeRemaining === 0) {
+        //     clearInterval(intervalId);
+        //   }
+ 
+        // if (timeRemaining === 0) {
+        //   timeRemaining = 10
+        //   let random_number = generateRandomNumber();
+        //   localStorage.setItem("randomNumber", random_number);
+        //   randomNumber = random_number
+        // }
+        // console.log('changes in randomNumber: ', randomNumber)
+
+        // let timer = document.getElementById('timer')
+        // timer.innerHTML = formatTime(timeRemaining)
+
+
+
+
+
+// let timerElement = document.getElementById("timer");
+// if (!timerElement) {
+//     console.error("Missing timer element.");
+//     return;
+// }
+
+// let countdown = parseInt(localStorage.getItem("timer")) || 10;
+// console.log("Starting countdown:", countdown);
+
+// let intervalId = setInterval(() => {
+//     countdown--;
+//     console.log("Countdown:", countdown);
     
-    if (countdown < 0) {
-        clearInterval(intervalId);
-        console.log("Countdown complete.");
-        countdown = 0;
-    } else {
-        let hours = Math.floor(countdown / 3600).toString().padStart(2, "0");
-        let minutes = Math.floor((countdown % 3600) / 60).toString().padStart(2, "0");
-        let seconds = (countdown % 60).toString().padStart(2, "0");
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        timerElement.innerHTML = `${hours}:${minutes}:${seconds}`;
-        localStorage.setItem("timer", countdown);
+//     if (countdown < 0) {
+//         clearInterval(intervalId);
+//         console.log("Countdown complete.");
+//         countdown = 0;
+//     } else {
+//         let hours = Math.floor(countdown / 3600).toString().padStart(2, "0");
+//         let minutes = Math.floor((countdown % 3600) / 60).toString().padStart(2, "0");
+//         let seconds = (countdown % 60).toString().padStart(2, "0");
+//         seconds = seconds < 10 ? '0' + seconds : seconds;
+//         timerElement.innerHTML = `${hours}:${minutes}:${seconds}`;
+//         localStorage.setItem("timer", countdown);
 
-        if (countdown === 0) {
-            clearInterval(intervalId);
-            console.log("Generating machine draw.");
-            result.innerHTML = "[" + machineDraw.join(", ") + "]";
-            wait.style.display = "none";
-            localStorage.removeItem("machineDraw");
-            machineDraw.length = 0;
-            for (let i = 0; i < 5; i++) {
-                machineDraw.push(Math.floor(Math.random() * 10));
-                const number = document.createElement("div");
-                number.textContent = machineDraw[i];
-                number.classList.add("number");
-                drawNumbers.appendChild(number);
-            }
-            setTimeout(() => {
-                result.innerHTML = "";
-                wait.style.display = "block";
-                console.log("Starting new countdown.");
-                startTimer();
-            }, 5000);
-        }
-    }
-}, 1000);
+//         if (countdown === 0) {
+//             clearInterval(intervalId);
+//             console.log("Generating machine draw.");
+//             result.innerHTML = "[" + machineDraw.join(", ") + "]";
+//             wait.style.display = "none";
+//             localStorage.removeItem("machineDraw");
+//             machineDraw.length = 0;
+//             for (let i = 0; i < 5; i++) {
+//                 machineDraw.push(Math.floor(Math.random() * 10));
+//                 const number = document.createElement("div");
+//                 number.textContent = machineDraw[i];
+//                 number.classList.add("number");
+//                 drawNumbers.appendChild(number);
+//             }
+//             setTimeout(() => {
+//                 result.innerHTML = "";
+//                 wait.style.display = "block";
+//                 console.log("Starting new countdown.");
+//                 startTimer();
+//             }, 5000);
+//         }
+//     }
+// }, 1000);
+// }
+
+let formatTime = (time) => {
+    return time < 10 ? `0${time}` : time;
+  }
+let parsedTime = 10;
+if(localStorage.remainingSeconds === undefined){
+    localStorage.remainingSeconds = parsedTime;
 }
-    startTimer();
+function countdown(seconds=localStorage.remainingSeconds) {
+    let intervalId = setInterval(function () {
+      let hours = Math.floor(seconds / 3600);
+      let minutes = Math.floor((seconds % 3600) / 60);
+      let myseconds = seconds % 60;
+      seconds--;
+      localStorage.remainingSeconds = seconds;
+      // updateProgressBar(seconds, 60, 1);
+   
+      if (seconds < 0) {
+        clearInterval(intervalId);
+        countdown(parsedTime);
+        getDrawnumbers();
+      }
+     let  hrs = formatTime(hours);
+     let  secs = formatTime(myseconds);
+     let  mins = formatTime(minutes);
+      let time = `${hrs}:${mins}:${secs}`;
+      localStorage.timer = time;
+      let el = document.querySelector("#timer");
+      el.innerText = time;
+    }, 1000);
+  }
+
+  let el = document.querySelector("#timer");
+  el.innerText = localStorage.timer;
+  
+
+// const timerLoop = setInterval(startTimer);
+countdown();
 
   const row1buttons = document.querySelectorAll(".btn-row1");
   const row1SpecialButtons = document.querySelectorAll(".special-row1");
@@ -177,18 +217,19 @@ let intervalId = setInterval(() => {
 
   const instructions = [
    "Choose at least one number from each row.",
-   "Make your best five guesses on each row.",
-   "Select numbers to form the combinations you intend to guess.",
-   "Choose from only the first row.",
-   "Choose from only the second row.",
-   "Choose from only the third row.",
-   "Try your luck.",
-   "Choose only one number from each row.",
+//    "Make your best five guesses on each row.",
+//    "Select numbers from all rows to form the combinations you intend to guess.",
+   "Choose at least 5 numbers from only the first row."
+//    "Choose from only the second row.",
+//    "Choose from only the third row.",
+//    "Try your luck.",
+//    "Choose only one number from each row.",
  ];
+ const randomIndex = Math.floor(Math.random() * instructions.length);
+//  const randomInstruction = instructions[randomIndex];
+const randomInstruction = instructions[1];
 
  function updateInstructions() {
-   const randomIndex = Math.floor(Math.random() * instructions.length);
-   const randomInstruction = instructions[randomIndex];
    document.getElementById("instructions").innerHTML = randomInstruction;
  }
 
@@ -339,9 +380,9 @@ let intervalId = setInterval(() => {
   document.getElementById("clear-row1").addEventListener("click", () => {
     row1HighlightedButtons = [];
     row1AllSelectedNumbers = [];
-    let clear = [];
+    // let clear = [];
     row1buttons.forEach((button) => {
-      let buttonNumber = parseInt(button.textContent);
+    //   let buttonNumber = parseInt(button.textContent);
       button.classList.remove("highlighted");
       const index = row1AllSelectedNumbers.indexOf(
         parseInt(button.textContent)
@@ -500,9 +541,9 @@ let intervalId = setInterval(() => {
   document.getElementById("clear-row2").addEventListener("click", () => {
     row2HighlightedButtons = [];
     row2AllSelectedNumbers = [];
-    let clear = [];
+    // let clear = [];
     row2buttons.forEach((button) => {
-      let buttonNumber = parseInt(button.textContent);
+    //   let buttonNumber = parseInt(button.textContent);
       button.classList.remove("highlighted");
       const index = row2AllSelectedNumbers.indexOf(
         parseInt(button.textContent)
@@ -661,9 +702,9 @@ let intervalId = setInterval(() => {
   document.getElementById("clear-row3").addEventListener("click", () => {
     row3HighlightedButtons = [];
     row3AllSelectedNumbers = [];
-    let clear = [];
+    // let clear = [];
     row3buttons.forEach((button) => {
-      let buttonNumber = parseInt(button.textContent);
+    //   let buttonNumber = parseInt(button.textContent);
       button.classList.remove("highlighted");
       const index = row3AllSelectedNumbers.indexOf(
         parseInt(button.textContent)
@@ -876,6 +917,65 @@ let intervalId = setInterval(() => {
     console.log(row3AllSelectedNumbers);
   }
 
+  function calculateCombinations(selection) {
+    const n = selection.length;
+  
+    // Check if selection has at least 5 numbers
+    if (n < 5) {
+      console.log("Error: Selection must have at least 5 numbers");
+      return 0;
+    }
+  
+    // To calculate number of combinations of 5 numbers from user selection on 1 row
+    let combinations = [];
+    if (n === 5) {
+      combinations.push(selection);
+    } else {
+      for (let i = 0; i < n-4; i++) {
+        for (let j = i+1; j < n-3; j++) {
+          for (let k = j+1; k < n-2; k++) {
+            for (let m = k+1; m < n-1; m++) {
+              for (let p = m+1; p < n; p++) {
+                combinations.push([selection[i], selection[j], selection[k], selection[m], selection[p]]);
+              }
+            }
+          }
+        }
+      }
+    }
+  
+    return combinations;
+  }
+
+  function getCombinations(array, r) {
+    const result = [];
+   
+    // Recursive function to generate combinations
+    function generateCombos(combination, index) {
+      if (combination.length === r) {
+        result.push(combination);
+        return;
+      }
+   
+      if (index >= array.length) {
+        return;
+      }
+   
+      const newCombo = [...combination];
+      newCombo.push(array[index]);
+   
+      generateCombos(newCombo, index + 1);
+      generateCombos(combination, index + 1);
+    }
+   
+    generateCombos([], 0);
+    return result;
+  }
+ 
+  let q = [0,4,6,8];
+  console.log("Q Combo:", getCombinations(q, 1));
+  
+
   // Submit the selection made and clear
   document.getElementById("submit").addEventListener("click", () => {
     let allSelectedNumbers = [];
@@ -883,13 +983,24 @@ let intervalId = setInterval(() => {
     allSelectedNumbers.push(row2AllSelectedNumbers);
     allSelectedNumbers.push(row3AllSelectedNumbers);
     let mergedRowsArray = JSON.stringify(allSelectedNumbers);
-    console.log("Selected numbers from all rows: ", mergedRowsArray);
 
-    let combinations = [];
+
+    if (randomInstruction === "Choose at least 5 numbers from only the first row.") {
+        allSelectedNumbers = row1AllSelectedNumbers;
+        const combinations = calculateCombinations(row1AllSelectedNumbers);
+        console.log(`Number of combinations: ${combinations.length}`);
+        console.log(JSON.stringify(combinations));
+      }
+
+      console.log("Selected numbers from all rows: ", mergedRowsArray);
+
+
+    if (randomInstruction === "Choose at least one number from each row.") {
+        let combinations = [];
     for (let i = 0; i < row1AllSelectedNumbers.length; i++) {
       for (let j = 0; j < row2AllSelectedNumbers.length; j++) {
         for (let k = 0; k < row3AllSelectedNumbers.length; k++) {
-          // combinations.push([row1AllSelectedNumbers[i], row2AllSelectedNumbers[j], row3AllSelectedNumbers[k]]);
+          combinations.push([row1AllSelectedNumbers[i], row2AllSelectedNumbers[j], row3AllSelectedNumbers[k]]);
           const currentCombination = [
             row1AllSelectedNumbers[i],
             row2AllSelectedNumbers[j],
@@ -903,69 +1014,56 @@ let intervalId = setInterval(() => {
       }
     }
     console.log(JSON.stringify(combinations));
-
     let totalBets = combinations.length;
     console.log("Total number of bets: ", totalBets);
-
-    // const machineDraw = [1, 5, 2, 7, 6];
-    // const card = document.getElementById("card");
-    // const drawNumbers = document.getElementById("draw-numbers");
-    // const result = document.getElementById("result");
-    // const wait = document.getElementById("wait");
-
-    // for (let i = 0; i < machineDraw.length; i++) {
-    //   const number = document.createElement("div");
-    //   number.textContent = machineDraw[i];
-    //   number.classList.add("number");
-    //   drawNumbers.appendChild(number);
-    // }
-
-    if (
-      JSON.stringify(machineDraw) ===
-      JSON.stringify(row1AllSelectedNumbers.slice(0, machineDraw.length))
-    ) {
-      result.textContent = "Row 1 matched in the same order!";
-      result.classList.add("match");
-    } else if (
-      JSON.stringify(machineDraw) ===
-      JSON.stringify(row2AllSelectedNumbers.slice(0, machineDraw.length))
-    ) {
-      result.textContent = "Row 2 matched in the same order!";
-      result.classList.add("match");
-    } else if (
-      JSON.stringify(machineDraw) ===
-      JSON.stringify(row3AllSelectedNumbers.slice(0, machineDraw.length))
-    ) {
-      result.textContent = "Row 3 matched in the same order!";
-      result.classList.add("match");
-    } else {
-      result.textContent = "No row matched in the same order.";
-      result.classList.add("nomatch");
     }
 
-    // clear row 1 after submission
-    row1buttons.forEach((button) => {
-      let buttonNumber = parseInt(button.textContent);
-      button.classList.remove("highlighted");
-      row1AllSelectedNumbers = [];
-    });
-    console.log(row1AllSelectedNumbers);
+    // if (
+    //   JSON.stringify(machineDraw) ===
+    //   JSON.stringify(row1AllSelectedNumbers.slice(0, machineDraw.length))
+    // ) {
+    //   result.textContent = "Row 1 matched in the same order!";
+    //   result.classList.add("match");
+    // } else if (
+    //   JSON.stringify(machineDraw) ===
+    //   JSON.stringify(row2AllSelectedNumbers.slice(0, machineDraw.length))
+    // ) {
+    //   result.textContent = "Row 2 matched in the same order!";
+    //   result.classList.add("match");
+    // } else if (
+    //   JSON.stringify(machineDraw) ===
+    //   JSON.stringify(row3AllSelectedNumbers.slice(0, machineDraw.length))
+    // ) {
+    //   result.textContent = "Row 3 matched in the same order!";
+    //   result.classList.add("match");
+    // } else {
+    //   result.textContent = "No row matched in the same order.";
+    //   result.classList.add("nomatch");
+    // }
 
     // clear row 1 after submission
-    row2buttons.forEach((button) => {
-      let buttonNumber = parseInt(button.textContent);
-      button.classList.remove("highlighted");
-      row2AllSelectedNumbers = [];
-    });
-    console.log(row2AllSelectedNumbers);
+    // row1buttons.forEach((button) => {
+    //   let buttonNumber = parseInt(button.textContent);
+    //   button.classList.remove("highlighted");
+    //   row1AllSelectedNumbers = [];
+    // });
+    // console.log(row1AllSelectedNumbers);
 
     // clear row 1 after submission
-    row3buttons.forEach((button) => {
-      let buttonNumber = parseInt(button.textContent);
-      button.classList.remove("highlighted");
-      row3AllSelectedNumbers = [];
-    });
-    console.log(row3AllSelectedNumbers);
+    // row2buttons.forEach((button) => {
+    //   let buttonNumber = parseInt(button.textContent);
+    //   button.classList.remove("highlighted");
+    //   row2AllSelectedNumbers = [];
+    // });
+    // console.log(row2AllSelectedNumbers);
+
+    // clear row 1 after submission
+    // row3buttons.forEach((button) => {
+    //   let buttonNumber = parseInt(button.textContent);
+    //   button.classList.remove("highlighted");
+    //   row3AllSelectedNumbers = [];
+    // });
+    // console.log(row3AllSelectedNumbers);
 
     // setInterval(function(){
     //   location.reload();

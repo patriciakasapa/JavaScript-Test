@@ -7,6 +7,11 @@
     margin: 2rem;
 }
 
+#card {
+    text-align: center;
+    margin-left: 30rem;
+}
+
 .instruction {
 background-color: #f7e708;
 border: none;
