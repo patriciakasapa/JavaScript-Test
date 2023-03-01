@@ -81,87 +81,6 @@ function getDrawnumbers() {
     document.querySelector("#draw-numbers").innerHTML = output;
 }
 
-    // function startTimer() {
-
-      
-       
-        // let timeRemaining = parseInt(localStorage.getItem("timer")) || 10;
-        // let randomNumber = parseInt(localStorage.getItem("timer")) || 10;
-        // localStorage.setItem("timeRemaining", timeRemaining);
-
-        // const intervalId = setInterval(() => {
-        //     timeRemaining -=1
-        //   }, 1000);
-       
-        //   if (timeRemaining === 0) {
-        //     clearInterval(intervalId);
-        //   }
- 
-        // if (timeRemaining === 0) {
-        //   timeRemaining = 10
-        //   let random_number = generateRandomNumber();
-        //   localStorage.setItem("randomNumber", random_number);
-        //   randomNumber = random_number
-        // }
-        // console.log('changes in randomNumber: ', randomNumber)
-
-        // let timer = document.getElementById('timer')
-        // timer.innerHTML = formatTime(timeRemaining)
-
-
-
-
-
-// let timerElement = document.getElementById("timer");
-// if (!timerElement) {
-//     console.error("Missing timer element.");
-//     return;
-// }
-
-// let countdown = parseInt(localStorage.getItem("timer")) || 10;
-// console.log("Starting countdown:", countdown);
-
-// let intervalId = setInterval(() => {
-//     countdown--;
-//     console.log("Countdown:", countdown);
-    
-//     if (countdown < 0) {
-//         clearInterval(intervalId);
-//         console.log("Countdown complete.");
-//         countdown = 0;
-//     } else {
-//         let hours = Math.floor(countdown / 3600).toString().padStart(2, "0");
-//         let minutes = Math.floor((countdown % 3600) / 60).toString().padStart(2, "0");
-//         let seconds = (countdown % 60).toString().padStart(2, "0");
-//         seconds = seconds < 10 ? '0' + seconds : seconds;
-//         timerElement.innerHTML = `${hours}:${minutes}:${seconds}`;
-//         localStorage.setItem("timer", countdown);
-
-//         if (countdown === 0) {
-//             clearInterval(intervalId);
-//             console.log("Generating machine draw.");
-//             result.innerHTML = "[" + machineDraw.join(", ") + "]";
-//             wait.style.display = "none";
-//             localStorage.removeItem("machineDraw");
-//             machineDraw.length = 0;
-//             for (let i = 0; i < 5; i++) {
-//                 machineDraw.push(Math.floor(Math.random() * 10));
-//                 const number = document.createElement("div");
-//                 number.textContent = machineDraw[i];
-//                 number.classList.add("number");
-//                 drawNumbers.appendChild(number);
-//             }
-//             setTimeout(() => {
-//                 result.innerHTML = "";
-//                 wait.style.display = "block";
-//                 console.log("Starting new countdown.");
-//                 startTimer();
-//             }, 5000);
-//         }
-//     }
-// }, 1000);
-// }
-
 let formatTime = (time) => {
     return time < 10 ? `0${time}` : time;
   }
@@ -200,6 +119,20 @@ function countdown(seconds=localStorage.remainingSeconds) {
 // const timerLoop = setInterval(startTimer);
 countdown();
 
+  const instructions = [
+   "Choose at least one number from each row.",
+//    "Make your best five guesses on each row.",
+//    "Select numbers from all rows to form the combinations you intend to guess.",
+   "Choose at least 5 numbers from only the first row.",
+   "In royal 5, group 60 game, you need to select at least one number from the first row and three numbers from the second row to form a bet.",
+//    "Choose from only the third row.",
+//    "Try your luck.",
+//    "Choose only one number from each row.",
+ ];
+ const randomIndex = Math.floor(Math.random() * instructions.length);
+//  const randomInstruction = instructions[randomIndex];
+const randomInstruction = instructions[2];
+
   const row1buttons = document.querySelectorAll(".btn-row1");
   const row1SpecialButtons = document.querySelectorAll(".special-row1");
   let row1HighlightedButtons = [];
@@ -215,19 +148,10 @@ countdown();
   let row3HighlightedButtons = [];
   let row3AllSelectedNumbers = [];
 
-  const instructions = [
-   "Choose at least one number from each row.",
-//    "Make your best five guesses on each row.",
-//    "Select numbers from all rows to form the combinations you intend to guess.",
-   "Choose at least 5 numbers from only the first row."
-//    "Choose from only the second row.",
-//    "Choose from only the third row.",
-//    "Try your luck.",
-//    "Choose only one number from each row.",
- ];
- const randomIndex = Math.floor(Math.random() * instructions.length);
-//  const randomInstruction = instructions[randomIndex];
-const randomInstruction = instructions[1];
+  // if (randomInstruction === "In royal 5, group 60 game, you need to select at least one number from the first row and three numbers from the second row to form a bet.") {
+  //   row3buttons.style.display = 'none';
+  //   row3SpecialButtons.style.display = 'none';
+  // }
 
  function updateInstructions() {
    document.getElementById("instructions").innerHTML = randomInstruction;
@@ -878,7 +802,7 @@ const randomInstruction = instructions[1];
   });
 
   function clearAllNumbers(columnNum, selectedNumbers) {
-    const clearButton = document.getElementById(`clear${columnNum}`);
+    // const clearButton = document.getElementById(`clear${columnNum}`);
 
     // Loop through each button in row 1 to clear
     row1buttons.forEach((button) => {
@@ -972,9 +896,22 @@ const randomInstruction = instructions[1];
     return result;
   }
  
-  let q = [0,4,6,8];
-  console.log("Q Combo:", getCombinations(q, 1));
+  // let q = [0,4,6,8];
+  // console.log("Q Combo:", getCombinations(q, 1));
   
+  function mergeAndCheck2(arr1, arr2) {
+    let mergedArr = [];
+    for (let i = 0; i < arr1.length; i++) {
+      for (let j = 0; j < arr2.length; j++) {
+        if (arr2[j].indexOf(arr1[i][0]) !== -1 && arr1[i].every(val => arr2[j].indexOf(val) !== -1)) {
+          continue; // skip if arr1 and arr2 have same values
+        } else {
+          mergedArr.push([...arr1[i], ...arr2[j]]);
+        }
+      }
+    }
+    return mergedArr;
+  }
 
   // Submit the selection made and clear
   document.getElementById("submit").addEventListener("click", () => {
@@ -1016,6 +953,14 @@ const randomInstruction = instructions[1];
     console.log(JSON.stringify(combinations));
     let totalBets = combinations.length;
     console.log("Total number of bets: ", totalBets);
+    }
+
+    if (randomInstruction === "In royal 5, group 60 game, you need to select at least one number from the first row and three numbers from the second row to form a bet.") {
+      let row1Combo = getCombinations(row1AllSelectedNumbers, 1);
+      let row2Combo = getCombinations(row2AllSelectedNumbers, 3);
+      let merge = mergeAndCheck2(row1Combo, row2Combo);
+        console.log(JSON.stringify(merge));
+        console.log("Number of bets", JSON.stringify(merge.length));
     }
 
     // if (
