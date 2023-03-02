@@ -1,0 +1,27 @@
+// Tuesday
+// Task 1
+// Make five rows of 0 -9 numbers
+// each row should have it own array
+// example row[], row2[], row3[], row4[], row5[]
+// When you click on row1 you push to row1[] Array
+// make an allSelection string for all the rows "1,2,3|3,4|||"
+//
+// Task 2
+// Add a vertical selection below all the five rows
+// All button, clear button
+
+
+
+Task 1: Assuming we have 5rows, each row contains 10 buttons. Thus from 0 - 9. and 1 susbmit button
+A user has to select at least one number from each row to form a bet. 
+if the user makes this selection row1 = [3,2,4,5,6] row2 = [1,1,8,9] row3 = [2,6,5,4,8]
+
+1. create the rows and buttons respectively.
+2. Calculate the number of bets the user has.
+3. Output to the console the user selections, and the total number of bet on click on the submit button
+
+Task 2. Store the selected buttons text into an array. In this case, the position of the array matters so becareful. Note that the selected text can be added and removed from the array.
+
+Task 3. Given this as the user selection [[2,1,5,6,7],[1,7,3,45],[6,2,4,5,6]] representing each row.
+and a machine draw number [1,5,2,7,6]. 
+1. Check  through the array, because now its position base, check if the position of the machine number matches the position as the selected user arrrays.

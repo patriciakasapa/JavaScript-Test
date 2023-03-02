@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@100&display=swap');
+#timer {
+    font-size: 3rem;
+    font-family: 'Heebo', sans-serif;
+    color: #088b8b;
+    text-align: center;
+    margin: 0rem;
+}
+
+#card {
+    text-align: center;
+    margin-left: 30rem;
+}
+
+.instruction {
+background-color: #f7e708;
+border: none;
+color: rgb(12, 16, 224);
+padding: 10px 25px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 12px;
+border-radius: 5px;
+margin: 17%;
+cursor: pointer;
+position: absolute;
+}
+
+.instruction:hover {
+background-color: #866303;
+}
+
+.btn {
+background-color: #4caf50;
+width: 50px;
+height: 50px;
+font-size: 20px;
+margin: 10px;
+border: none;
+color: blue;
+border-radius: 50px;
+border: 2px solid #4caf50;
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+.numberButton {
+background-color: white;
+}
+
+.numberButton:hover {
+background-color: #4caf50;
+color: white;
+}
+
+.button-container {
+display: flex;
+}
+
+.all-btn .special {
+background-color: #520670;
+border: 1px solid rgb(177, 62, 9);
+color: white;
+text-align: center;
+text-decoration: none;
+font-size: 12px;
+cursor: pointer;
+width: 60px;
+padding: 8px 20px;
+display: inline-block;
+margin-top: 20px;
+}
+
+.special-all {
+margin-left: 2px;
+margin-right: 4px;
+}
+
+.clear-all .special {
+background-color: #f50808;
+border: 1px solid rgb(117, 41, 5);
+color: white;
+text-align: center;
+text-decoration: none;
+font-size: 12px;
+cursor: pointer;
+width: 60px;
+padding: 8px 10px;
+display: inline-block;
+margin-top: 20px;
+}
+
+.special-clear-all {
+margin-left: 2px;
+margin-right: 4px;
+}
+
+.all-btn .special:hover {
+background-color: #bf35e2;
+}
+
+.btn-group .special {
+background-color: #ad7b1c;
+border: 1px solid rgb(177, 62, 9);
+color: white;
+text-align: center;
+text-decoration: none;
+font-size: 12px;
+cursor: pointer;
+width: 80px;
+padding: 8px 30px;
+display: inline-block;
+margin-top: 20px;
+}
+
+.btn-group .special:hover {
+background-color: #5e3903;
+}
+
+.highlighted {
+background-color: yellow;
+}
+
+.submit {
+background-color: #4caf50;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: -65px 895px;
+cursor: pointer;
+position: absolute;
+}
+
+.submit:hover {
+background-color: #024420;
+}
+
+#card {
+display: flex;
+flex-direction: column;
+align-items: center;
+width: 50%;
+margin-top: 1%;
+}
+
+#draw-numbers {
+display: flex;
+justify-content: center;
+margin-bottom: 20px;
+}
+
+/* .number {
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background-color: #f0f0f0;
+color: #333;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 24px;
+font-weight: bold;
+margin-right: 10px;
+} */
+
+.drawNumber {
+    font-size: 4rem;
+    padding: 1rem;
+    background-color: #f0f0f0;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    display: inline-block;
+    text-align: center;
+}
+
+#result {
+display: flex;
+justify-content: center;
+margin-top: 5px;
+font-size: 18px;
+font-weight: bold;
+}
+
+#result.match {
+color: green;
+}
+
+#result.nomatch {
+color: red;
+}
